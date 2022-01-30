@@ -8,6 +8,10 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+    
+defaults:
+  run:
+    working-directory: wtb-bot
 
 jobs:
   build:
@@ -21,12 +25,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        path: wtb-bot-automation
+        path: ${{ github.workspace }}/wtb-bot-automation
         
     - uses: actions/checkout@v2
       with:
         repository: M3tz3l/wtb-bot
         token: ${{ secrets.WTB_BOT_PAT }}
+        path: ${{ github.workspace }}/wtb-bot
         
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
@@ -35,7 +40,6 @@ jobs:
         cache: 'npm'
         
     - name: Build and run
-      working-directory: ./wtb-bot
       run: |
         npm ci
         npm start
