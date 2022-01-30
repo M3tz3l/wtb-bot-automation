@@ -40,6 +40,16 @@ jobs:
         npm ci
         npm start
         
+    - name: Update list of sent news
+      working-directory: ./wtb-bot-automation
+      run: |-
+        git diff
+        git config --global user.email "actions@users.noreply.github.com"
+        git config --global user.name "GitHub Actions"
+        git add -A
+        git commit -m "⏰ Github Action Cron" || exit 0
+        git push
+        
     env:
       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
       SENT_NEWS_PATH: "${{ github.workspace }}/wtb-bot-automation/data/processed_news.json"
