@@ -20,11 +20,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Checkout private tools
-      uses: actions/checkout@v2
+      with:
+        path: wtb-bot-automation
+    - uses: actions/checkout@v2
       with:
         repository: M3tz3l/wtb-bot
-        token: ${{ secrets.WTB_BOT_PAT }} # `GH_PAT` is a secret that contains your PAT
+        token: ${{ secrets.WTB_BOT_PAT }}
         path: wtb-bot
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
@@ -39,4 +40,4 @@ jobs:
         npm start
     env:
       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-      SENT_NEWS_PATH: "${{ github.workspace }}/data/processed_news.json"
+      SENT_NEWS_PATH: "${{ github.workspace }}/wtb-bot-automation/data/processed_news.json"
