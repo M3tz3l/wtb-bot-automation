@@ -22,15 +22,15 @@ jobs:
     - uses: actions/checkout@v2
       with:
         path: wtb-bot-automation
+        
     - uses: actions/checkout@v2
       with:
         repository: M3tz3l/wtb-bot
         token: ${{ secrets.WTB_BOT_PAT }}
-        path: wtb-bot
+        
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
-        working-directory: ./wtb-bot
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         
@@ -39,6 +39,7 @@ jobs:
       run: |
         npm ci
         npm start
+        
     env:
       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
       SENT_NEWS_PATH: "${{ github.workspace }}/wtb-bot-automation/data/processed_news.json"
