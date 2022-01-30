@@ -26,6 +26,7 @@ jobs:
       with:
         repository: M3tz3l/wtb-bot
         token: ${{ secrets.WTB_BOT_PAT }}
+        branch: main
         path: wtb-bot
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
