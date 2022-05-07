@@ -54,4 +54,6 @@ jobs:
         
     env:
       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+      RESULTS_WEBHOOK_URL: ${{ secrets.RESULTS_WEBHOOK_URL }}
       SENT_NEWS_PATH: "${{ github.workspace }}/wtb-bot-automation/data/processed_news.json"
+      SENT_RESULTS_PATH: "${{ github.workspace }}/wtb-bot-automation/data/processed_results.json"
