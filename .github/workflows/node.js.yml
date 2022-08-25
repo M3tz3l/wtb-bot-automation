@@ -42,7 +42,7 @@ jobs:
         npm ci
         npm start
         
-    - name: Update list of sent news
+    - name: Update list of sent news and sent results
       working-directory: ./wtb-bot-automation
       run: |-
         git diff
