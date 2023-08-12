@@ -21,18 +21,19 @@ jobs:
         node-version: [16.x]
 
     steps:    
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         repository: M3tz3l/wtb-bot
         token: ${{ secrets.WTB_BOT_PAT }}
         path: ${{ github.workspace }}
         
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         path: ${{ github.workspace }}/wtb-bot-automation
+        ref: main
         
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
@@ -50,7 +51,7 @@ jobs:
         git config --global user.name "GitHub Actions"
         git add -A
         git commit -m "⏰ Github Action Cron" || exit 0
-        git push
+        git push origin HEAD:main
         
     env:
       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
