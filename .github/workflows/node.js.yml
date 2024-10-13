@@ -21,19 +21,19 @@ jobs:
         node-version: [16.x]
 
     steps:    
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         repository: M3tz3l/wtb-bot
         token: ${{ secrets.WTB_BOT_PAT }}
         path: ${{ github.workspace }}
         
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         path: ${{ github.workspace }}/wtb-bot-automation
         ref: main
         
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
