@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
 
     steps:    
     - uses: actions/checkout@v4
@@ -38,9 +38,14 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         
-    - name: Build and run
+    - name: Install Playwright browsers
       run: |
         npm ci
+        npx playwright install chromium --with-deps
+        
+    - name: Build and run
+      run: |
+        npm run build
         npm start
         
     - name: Update list of sent news and sent results
@@ -54,6 +59,7 @@ jobs:
         git push origin HEAD:main
         
     env:
+      TEST_MODE: 'false'
       WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
       RESULTS_WEBHOOK_URL: ${{ secrets.RESULTS_WEBHOOK_URL }}
       SENT_NEWS_PATH: "${{ github.workspace }}/wtb-bot-automation/data/processed_news.json"
